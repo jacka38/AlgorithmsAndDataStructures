@@ -71,8 +71,6 @@ public class Algorithms<T extends Comparable<T>>{
         result.theMode = array[0];
         result.count = -1;
 
-        
-
         while(i < array.length){
             if(array[i].compareTo(array[i-1]) <= 0){
             tempF++;
