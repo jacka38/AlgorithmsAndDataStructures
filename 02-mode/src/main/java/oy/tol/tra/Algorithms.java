@@ -46,4 +46,52 @@ public class Algorithms<T extends Comparable<T>>{
         array[first] = array[second];
         array[second] = temp; 
     }
+
+
+    public static class ModeSearchResult<T> {
+        public T theMode;
+        public int count = 0;
+    }
+  
+    public static <T extends Comparable<T>> ModeSearchResult<T> findMode(T [] array) {
+        ModeSearchResult<T> result = new ModeSearchResult<>();
+        result.theMode = null;
+        result.count = -1;
+
+        int topF = 1;
+        int tempF = 1;
+        int i = 1;
+
+        if(array == null || array.length < 2){
+            return result;
+        }
+
+        sort(array);
+
+        result.theMode = array[0];
+        result.count = -1;
+
+        
+
+        while(i < array.length){
+            if(array[i].compareTo(array[i-1]) <= 0){
+            tempF++;
+            } else {
+                if(tempF > topF){
+                    result.count = tempF;
+                    result.theMode = array[i-1];
+                    topF = tempF;
+                }
+                tempF = 1;
+            }
+            i++;
+        }
+        if(tempF > topF){
+            result.count = tempF;
+            result.theMode = array[i-1];
+            topF = tempF;
+        }
+        return result;
+    }
 }
+
