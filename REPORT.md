@@ -12,6 +12,18 @@ Jos tehtävässä pyydetään **raportoimaan** jotain, kirjoita myös nämä rap
 
 Tähän tehtävään liittyy raportti! Lue ohjeet!
 
+![02-mode](../../../../../E:/koodaus/VSC/tira/tira-origin-2022/02-mode/02-mode.png)
+
+Analysoi koodisi aikatehokkuutta eli suoritusaikaa diagrammin muihin mittauksiin ja niistä piirrettyihin viivadiagrammeihin. Tarkastele myös numeerisia arvoja ja kysy itseltäsi mikä mahtaa olla toteutuksen aikakompleksisuusluokka? Tutki koodiasi ja mieti mikä on koodisi aikakompleksisuus? Huomioi kaikki mitä tehdään findMode -metodin sisällä, mukaan lukien muut kutsuttavat omat metodisi. Mikä on tämän perusteella koodisi aikakompleksisuus? Miten se suhteutuu graafiseen esitykseen suoritusajoista n:n koon kasvaessa?
+
+Aika kompleksisuus on ohjelmassani Linearithmic (n log n), koska ohjelma on lajittelu algoritmi ja se on paras, johon tämän lajittelun kanssa pystymme.
+
+Ohjelma lajittelee (sort) arvot ensiksi kasvavaan järjestykseen ja sitten tarkistaa kaikesta järjestelmällisesti tyyppiarvon. Mitä enemmän arvoja niin ohjelman pitää edelleen tarkistaa kaikki arvot, jotta saa oikean tyyppiarvo vastauksen. Ohjelman lopussa se tarkistaa vielä viimeisen arvon, että onko se tyyppiarvo. Ohjelman on käytävä kaikki arvot läpi ja laskea montako niitä on. Aikakompleksisuus on tässä algoritmissä (n * log * n)
+
+Graafisesti tämä näkyy käyränä, joka hitaasti mutta varmasti kasvaa eli mitä enemmän arvoja niin kauemmin kestää sen läpikäymisessä.
+
+Äärettömällä n koolla, järjestelmän suoritusaika kasvaisi myös äärettömäksi.
+
 ## 03-draw
 
 
