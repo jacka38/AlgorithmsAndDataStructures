@@ -164,9 +164,9 @@ public class Shapes {
     public void removeSelected4() {
         // 4th fast way
         // TODO: Implement method Algorithms.partitionByRule!
-        // int selectedIndex = Algorithms.partitionByRule(shapeArray, count, shape -> shape.isSelected());
+        int selectedIndex = Algorithms.partitionByRule(shapeArray, count, shape -> shape.isSelected());
         // Uncomment this and implement it below.
-        // removeFrom(selectedIndex);
+        removeFrom(selectedIndex);
     }
 
         // TODO: Implement this method!
