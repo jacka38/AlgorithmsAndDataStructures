@@ -172,6 +172,19 @@ public class Shapes {
         // TODO: Implement this method!
     public void removeFrom(int index) {
         
+        for (; index < shapeArray.length; index++){
+            shapeArray[index] = null;
+        }
+
+        int temp = 0;
+
+        for(int i = 0; i < shapeArray.length; i++){
+            if(shapeArray[i] != null){
+                temp++;
+            }
+        }
+        count = temp;
+
     }
 
     public Shape getShape(final int index) throws ArrayIndexOutOfBoundsException {

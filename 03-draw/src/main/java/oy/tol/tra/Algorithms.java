@@ -97,6 +97,10 @@ public class Algorithms<T extends Comparable<T>>{
 
     public static <T> int partitionByRule(T [] array, int count, Predicate<T> rule){
 
+        if(array == null){
+            return -1;
+        }
+
         int index = 0;
         
         for( ; index < count; index++){
@@ -117,7 +121,7 @@ public class Algorithms<T extends Comparable<T>>{
             }
             nextIndex++;
         }
-        return count;
+        return index;
     }
 }
 
