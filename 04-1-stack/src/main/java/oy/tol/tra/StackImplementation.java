@@ -1,7 +1,6 @@
 package oy.tol.tra;
 
 import javax.lang.model.element.Element;
-
 /**
  * An implementation of the StackInterface.
  * <p>
@@ -22,7 +21,6 @@ public class StackImplementation<E> implements StackInterface<E> {
    private Object [] itemArray;
    private int currentIndex;
    private int capacity;
-   private static final int MY_CONSTANT_VARIABLE = 10;
 
    /**
     * Allocates a stack with a default capacity.
@@ -30,7 +28,7 @@ public class StackImplementation<E> implements StackInterface<E> {
     */
    public StackImplementation() throws StackAllocationException {
       // TODO: call the constructor with size parameter with default size (see member variable!).
-      this(MY_CONSTANT_VARIABLE);
+      this(10);
    }
 
    /** TODO: Implement so that
@@ -41,26 +39,41 @@ public class StackImplementation<E> implements StackInterface<E> {
     * @throws StackAllocationException If cannot allocate room for the internal array.
     */
    public StackImplementation(int capacity) throws StackAllocationException {
-      itemArray = new Object[capacity]; 
- 
-      this.capacity = capacity;
-      currentIndex = -1;
+
+      if(capacity < 2){
+         throw new StackAllocationException("Stack size should be more than 1");
+      }
+      try{
+         itemArray = new Object[capacity]; 
+         this.capacity = capacity;
+         currentIndex = -1;
+
+      }catch(Exception e){
+         throw new StackAllocationException(e.getMessage());
+      }
    }
 
    @Override
    public int capacity() {
       // TODO: Implement this
-      return 0;
+      
+      return capacity;
    }
 
    @Override
    public void push(E element) throws StackAllocationException, NullPointerException {
       // TODO: Implement this
+
+      if(element==null){
+         throw new NullPointerException("Cannot push null elements to stack");
+      }
+
       if(currentIndex >= capacity - 1){
          reallocateArray();
       }
       currentIndex++;
       itemArray[currentIndex] = element;
+
    }
 
    @SuppressWarnings("unchecked")
@@ -68,7 +81,7 @@ public class StackImplementation<E> implements StackInterface<E> {
    public E pop() throws StackIsEmptyException {
       // TODO: Implement this
       if(isEmpty()){
-         throw new StackIsEmptyException("Cannot pop from empty Stack!");
+         throw new StackIsEmptyException("Cannot pop from empty Stack.");
       }
 
       E element = (E) itemArray[currentIndex];
@@ -101,27 +114,32 @@ public class StackImplementation<E> implements StackInterface<E> {
    public void clear() {
       // TODO: Implement this
 
-      if(isEmpty()){
-         throw new StackIsEmptyException("Cannot clear from empty Stack!");
-      }
-
-      E element = (E) itemArray[currentIndex];
-      for(int index = currentIndex; currentIndex == -1; index--){
-         itemArray[currentIndex] = null;
-      }
+      currentIndex = -1;
+      itemArray = new Object[capacity];
    }
 
    @Override
    public boolean isEmpty() {
       // TODO: Implement this
-
       return currentIndex < 0;
    }
 
    @Override
    public String toString() {
       // TODO: Implement this
-      return "";
+
+      StringBuilder builder = new StringBuilder();
+      builder.append("[");
+
+      for(int index = 0; index <= currentIndex; index++){
+         builder.append(itemArray[index]);
+         if(index < currentIndex){
+            builder.append(", ");
+         }
+      }
+
+      builder.append("]");
+      return builder.toString();
    }
 
    private void reallocateArray(){
