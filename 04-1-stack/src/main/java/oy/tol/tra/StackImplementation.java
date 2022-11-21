@@ -16,7 +16,11 @@ public class StackImplementation<E> implements StackInterface<E> {
    // TODO: Add member variables needed.
    // Do not use constant values in code, e.g. 10. Instead, define a constant for that. For example:
    // private static final int MY_CONSTANT_VARIABLE = 10;
-
+   
+   private E[] array;
+   private int currentIndex;
+   private int capacity;
+   private static final int MY_CONSTANT_VARIABLE = 10;
 
    /**
     * Allocates a stack with a default capacity.
@@ -24,6 +28,7 @@ public class StackImplementation<E> implements StackInterface<E> {
     */
    public StackImplementation() throws StackAllocationException {
       // TODO: call the constructor with size parameter with default size (see member variable!).
+      this(MY_CONSTANT_VARIABLE);
    }
 
    /** TODO: Implement so that
@@ -34,6 +39,9 @@ public class StackImplementation<E> implements StackInterface<E> {
     * @throws StackAllocationException If cannot allocate room for the internal array.
     */
    public StackImplementation(int capacity) throws StackAllocationException {
+      E[] array = (E[]) new Object[capacity]; 
+      this.capacity = capacity;
+      currentIndex = -1;
    }
 
    @Override
@@ -45,13 +53,25 @@ public class StackImplementation<E> implements StackInterface<E> {
    @Override
    public void push(E element) throws StackAllocationException, NullPointerException {
       // TODO: Implement this
+      if(currentIndex >= capacity - 1){
+         reallocateArray();
+      }
+      currentIndex++;
+      array[currentIndex] = element;
    }
 
    @SuppressWarnings("unchecked")
    @Override
    public E pop() throws StackIsEmptyException {
       // TODO: Implement this
-      return null;
+      if(isEmpty()){
+         throw new StackIsEmptyException("Cannot pop from empty Stack!");
+      }
+      
+      E element = array[currentIndex];
+      array[currentIndex] = null;
+
+      return element;
    }
 
    @SuppressWarnings("unchecked")
@@ -75,7 +95,11 @@ public class StackImplementation<E> implements StackInterface<E> {
    @Override
    public boolean isEmpty() {
       // TODO: Implement this
-      return false;
+      if(currentIndex < 0){
+         return true;
+      }else{
+         return false;
+      }
    }
 
    @Override
@@ -83,4 +107,14 @@ public class StackImplementation<E> implements StackInterface<E> {
       // TODO: Implement this
       return "";
    }
+
+   private void reallocateArray(){
+      int newCapacity = capacity * 2; 
+      E[] newArray = (E[]) new Object[newCapacity];
+
+      for(int i = 0; i < currentIndex; i++){
+         newArray[i] = array[i];
+      }
+   }
+
 }
