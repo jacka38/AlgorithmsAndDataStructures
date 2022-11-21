@@ -1,5 +1,7 @@
 package oy.tol.tra;
 
+import javax.lang.model.element.Element;
+
 /**
  * An implementation of the StackInterface.
  * <p>
@@ -17,7 +19,7 @@ public class StackImplementation<E> implements StackInterface<E> {
    // Do not use constant values in code, e.g. 10. Instead, define a constant for that. For example:
    // private static final int MY_CONSTANT_VARIABLE = 10;
    
-   private E[] array;
+   private Object [] itemArray;
    private int currentIndex;
    private int capacity;
    private static final int MY_CONSTANT_VARIABLE = 10;
@@ -39,7 +41,8 @@ public class StackImplementation<E> implements StackInterface<E> {
     * @throws StackAllocationException If cannot allocate room for the internal array.
     */
    public StackImplementation(int capacity) throws StackAllocationException {
-      E[] array = (E[]) new Object[capacity]; 
+      itemArray = new Object[capacity]; 
+ 
       this.capacity = capacity;
       currentIndex = -1;
    }
@@ -57,7 +60,7 @@ public class StackImplementation<E> implements StackInterface<E> {
          reallocateArray();
       }
       currentIndex++;
-      array[currentIndex] = element;
+      itemArray[currentIndex] = element;
    }
 
    @SuppressWarnings("unchecked")
@@ -67,10 +70,10 @@ public class StackImplementation<E> implements StackInterface<E> {
       if(isEmpty()){
          throw new StackIsEmptyException("Cannot pop from empty Stack!");
       }
-      
-      E element = array[currentIndex];
-      array[currentIndex] = null;
 
+      E element = (E) itemArray[currentIndex];
+      itemArray[currentIndex] = null;
+      currentIndex--;
       return element;
    }
 
@@ -78,28 +81,41 @@ public class StackImplementation<E> implements StackInterface<E> {
    @Override
    public E peek() throws StackIsEmptyException {
       // TODO: Implement this
-      return null;
+
+      if(isEmpty()){
+         throw new StackIsEmptyException("Cannot peek from empty Stack.");
+      }else{
+         return (E) itemArray[currentIndex];
+      }
    }
 
    @Override
    public int size() {
       // TODO: Implement this
-      return 0;
+      
+      int size = currentIndex + 1;
+      return size;
    }
 
    @Override
    public void clear() {
       // TODO: Implement this
+
+      if(isEmpty()){
+         throw new StackIsEmptyException("Cannot clear from empty Stack!");
+      }
+
+      E element = (E) itemArray[currentIndex];
+      for(int index = currentIndex; currentIndex == -1; index--){
+         itemArray[currentIndex] = null;
+      }
    }
 
    @Override
    public boolean isEmpty() {
       // TODO: Implement this
-      if(currentIndex < 0){
-         return true;
-      }else{
-         return false;
-      }
+
+      return currentIndex < 0;
    }
 
    @Override
@@ -109,11 +125,12 @@ public class StackImplementation<E> implements StackInterface<E> {
    }
 
    private void reallocateArray(){
+
       int newCapacity = capacity * 2; 
-      E[] newArray = (E[]) new Object[newCapacity];
+      Object [] newArray = new Object[newCapacity]; 
 
       for(int index = 0; index <= currentIndex; index++){
-         newArray[index] = array[index];
+         newArray[index] = itemArray[index];
       }
    }
 
