@@ -144,11 +144,19 @@ public class StackImplementation<E> implements StackInterface<E> {
 
    private void reallocateArray(){
 
+      try{
+
       int newCapacity = capacity * 2; 
       Object [] newArray = new Object[newCapacity]; 
 
       for(int index = 0; index <= currentIndex; index++){
          newArray[index] = itemArray[index];
+      }
+      itemArray = newArray;
+      capacity = newCapacity;
+      
+      }catch(Exception e){
+         throw new StackAllocationException("No room for bigger array");
       }
    }
 
