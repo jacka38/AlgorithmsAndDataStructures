@@ -112,8 +112,8 @@ public class StackImplementation<E> implements StackInterface<E> {
       int newCapacity = capacity * 2; 
       E[] newArray = (E[]) new Object[newCapacity];
 
-      for(int i = 0; i < currentIndex; i++){
-         newArray[i] = array[i];
+      for(int index = 0; index <= currentIndex; index++){
+         newArray[index] = array[index];
       }
    }
 
