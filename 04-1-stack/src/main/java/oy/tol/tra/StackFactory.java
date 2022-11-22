@@ -33,6 +33,7 @@ public class StackFactory {
     */
    public static StackInterface<Character> createCharacterStack(int capacity) {
       // TODO: Implement this!
-      return null;
+      
+      return new StackImplementation<>(capacity);
    }
 }

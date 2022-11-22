@@ -48,7 +48,7 @@ public class ParenthesisChecker {
     * @throws StackAllocationException If the stack cannot be allocated or reallocated if necessary.
     */
     public static int checkParentheses(StackInterface<Character> stack, String fromString) throws ParenthesesException {
-      // TODO:
+      // DONE:
       // for each character in the input string
       //   if character is an opening parenthesis -- one of "([{"
       //      push it into the stack (check for failure and throw an exception if so)
@@ -61,6 +61,35 @@ public class ParenthesisChecker {
       //         throw an exception, wrong kind of parenthesis were in the text (e.g. "asfa ( asdf } sadf")
       // if the stack is not empty after all the characters have been handled
       //   throw an exception since the string has more opening than closing parentheses.
-      return 0; // << TODO: Change that too!!
+            int n = 0;     
+            
+            for(int index = 0; index < fromString.length(); index++){   
+
+               char ch = fromString.charAt(index);
+
+               if(ch == '(' || ch == '[' || ch == '{'){ 
+                  n++;
+                  stack.push(ch);   
+               }else if(ch == ')' || ch == ']' || ch == '}'){
+      
+                     if(stack.isEmpty()){
+                        throw new ParenthesesException("Too many closing parentheses", -1);
+                     }
+
+                     else if (ch == '}' && stack.pop() != '{' ||
+                              ch == ']' && stack.pop() != '[' ||
+                              ch == ')' && stack.pop() != '('){
+                        throw new ParenthesesException("Wrong kind of parenthesis were in the text", -3);
+                     } 
+                     
+                     else n++;       
+                  }
+            }
+      
+            if(stack.isEmpty() == false){
+               throw new ParenthesesException("Too few closing parentheses", -2);
+            }
+      
+      return n; 
    }
 }
