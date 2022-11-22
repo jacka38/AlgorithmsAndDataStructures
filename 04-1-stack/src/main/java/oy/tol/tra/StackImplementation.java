@@ -1,6 +1,6 @@
 package oy.tol.tra;
 
-import javax.lang.model.element.Element;
+
 /**
  * An implementation of the StackInterface.
  * <p>

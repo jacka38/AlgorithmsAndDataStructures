@@ -73,7 +73,7 @@ import org.junit.jupiter.api.DisplayName;
     @DisplayName("Test filling the stack and emptying it using push and pop.")
     void pushPopStackTest() {
         // Create a random count to fill the stack to.
-        int elementCount = randomizer.nextInt(stackSize);
+        int elementCount = randomizer.nextInt(stackSize) + 10;
         // Fill the list with test data.
         List<Integer> testData = fillWithTestData(elementCount);
         // Push the test data to the stack, asserting that push succeeded.
@@ -107,13 +107,14 @@ import org.junit.jupiter.api.DisplayName;
         stackToTest.clear();
         assertTrue(stackToTest.isEmpty(), () -> "Stack should be empty after clearing it.");
         // Fill the stack to contain max number of items.
-        List<Integer> testData = fillWithTestData(stackSize);
+        int oldCapacity = stackToTest.capacity();
+        List<Integer> testData = fillWithTestData(oldCapacity);
         for (Integer value : testData) {
             assertDoesNotThrow(() -> stackToTest.push(value), "In this test push must succeed, but push failed.");
         }
         assertFalse(stackToTest.isEmpty(), () -> "Stack should not be empty here.");
         // Stack should be now full so the next push must reallocate internal array and capacity should be increased.
-        int oldCapacity = stackToTest.capacity();
+        
         assertDoesNotThrow( () -> stackToTest.push(42), "Pushing to a full stack must not fail.");
         int newCapacity = stackToTest.capacity();
         assertTrue(newCapacity > oldCapacity, () -> "The capacity did not grow when it should have.");
