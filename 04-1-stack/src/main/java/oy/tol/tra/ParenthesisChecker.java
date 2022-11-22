@@ -63,23 +63,24 @@ public class ParenthesisChecker {
       //   throw an exception since the string has more opening than closing parentheses.
             int n = 0;     
             
-            for(int index = 0; index < fromString.length(); index++){   
+            for(int index = 0; index < fromString.length(); index++){
 
                char ch = fromString.charAt(index);
 
-               if(ch == '(' || ch == '[' || ch == '{'){ 
+               if(ch == '(' || ch == '[' || ch == '{'){
                   n++;
-                  stack.push(ch);   
-               }else if(ch == ')' || ch == ']' || ch == '}'){
-      
-                     if(stack.isEmpty()){
-                        throw new ParenthesesException("Too many closing parentheses", -1);
-                     }
+                  stack.push(ch);
 
+               }else if(ch == ')' || ch == ']' || ch == '}'){
+
+                     if(stack.isEmpty()){
+                        throw new ParenthesesException("Too many closing parentheses", ParenthesesException.TOO_MANY_CLOSING_PARENTHESES);
+                     }
+                     
                      else if (ch == '}' && stack.pop() != '{' ||
                               ch == ']' && stack.pop() != '[' ||
                               ch == ')' && stack.pop() != '('){
-                        throw new ParenthesesException("Wrong kind of parenthesis were in the text", -3);
+                        throw new ParenthesesException("Wrong kind of parenthesis were in the text", ParenthesesException.PARENTHESES_IN_WRONG_ORDER);
                      } 
                      
                      else n++;       
@@ -87,7 +88,7 @@ public class ParenthesisChecker {
             }
       
             if(stack.isEmpty() == false){
-               throw new ParenthesesException("Too few closing parentheses", -2);
+               throw new ParenthesesException("Too few closing parentheses", ParenthesesException.TOO_FEW_CLOSING_PARENTHESES);
             }
       
       return n; 
