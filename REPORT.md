@@ -5,10 +5,14 @@ Kirjoita jokaisesta alla olevasta kurssitehtävästä parilla lauseella miten te
 Jos tehtävässä pyydetään **raportoimaan** jotain, kirjoita myös nämä raportit tähän dokumenttiin.
 
 ## 00-init
+Opin gitin käyttöä. En ole ennen käyttänyt git komentoja, joten on mukava päästä käyttämään oikean teollisuuden käytäntöjä ja työkaluja.
+Olen itse myös käyttänyt aikaisemmin Eclipsea, joten opin VSC käyttöä, joka tuntuu jo nyt erinomaiselta alustalta.
 
 ## 01-arrays
+Sain vähän koppia geneerisyydestä. Se taito oli jo vähän päässyt ruostumaan ohjelmointi 2 kurssilta. Tässä tehtävässä pääsin myös ensimmäistä kertaa kunnolla kiinni debuggaamisesta. Olen debugannut koodiani aikaisemminkin, mutta nyt ehkä palaset vasta "loksahtivat" paikoilleen jotenkin.
 
 ## 02-mode
+Opin aikakompeksisuudesta ja miten paljon eroa voi tehokkuudessa olla samaa tekevässä koodinpätkässä.
 
 Tähän tehtävään liittyy raportti! Lue ohjeet!
 
@@ -22,13 +26,12 @@ Ohjelma lajittelee (sort) arvot ensiksi kasvavaan järjestykseen ja sitten tarki
 
 Graafisesti tämä näkyy käyränä, joka hitaasti mutta varmasti kasvaa eli mitä enemmän arvoja niin kauemmin kestää sen läpikäymisessä.
 
-Äärettömällä n koolla, järjestelmän suoritusaika kasvaisi myös äärettömäksi.
 
 ## 03-draw
-
+Sain ensikosketuksen predikaatin käytössä. 
 
 ## 04-1-stack
-
+Ymmärrän Stack algoritmia nyt ja ymmärrän miten se toimii. Geneerisyyden ymmärrys syventyi hiukan jälleen.
 
 ## 04-2-queue
 
