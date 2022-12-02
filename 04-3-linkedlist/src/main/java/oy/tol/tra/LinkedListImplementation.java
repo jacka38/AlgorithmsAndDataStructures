@@ -1,5 +1,7 @@
 package oy.tol.tra;
 
+import java.util.Currency;
+
 public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    private class Node<T> {
@@ -17,15 +19,52 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    private Node<E> head = null;
    private int size = 0;
+   private int count;
 
    @Override
    public void add(E element) throws NullPointerException, LinkedListAllocationException {
       // TODO: Implement this.
+      if(null == head){
+         head = new Node<E>(element);
+         count++;
+      }else{
+         Node<E> current = head;
+         while(current.next != null){
+            current = current.next;
+         }
+         current.next = new Node<E>(element);
+         count++;
+      }
    }
 
    @Override
    public void add(int index, E element) throws NullPointerException, LinkedListAllocationException, IndexOutOfBoundsException {
       // TODO: Implement this.
+
+      if(index < 0 || index > count){
+         throw new IndexOutOfBoundsException("Index is wrong for this linked list");
+      }
+
+      if(index == 0){
+         Node<E> newNode = new Node<E>(element);
+         newNode.next = head;
+         head = newNode;
+         count++;
+      }else{
+         int counter = 0;
+         Node<E> current = head;
+         Node<E> previous = null;
+
+         while(counter < index){
+            previous = current;
+            current = current.next;
+            counter++;
+         }
+         Node<E> newNode = new Node<E>(element);
+         previous.next = newNode;
+         newNode.next = current;
+         count++;
+      }
    }
 
    @Override
@@ -55,12 +94,15 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
    @Override
    public int size() {
       // TODO: Implement this.
-      return -1;
+      size = count;
+      return size;
    }
 
    @Override
    public void clear() {
       // TODO: Implement this.
+
+      Node<E> head = null;
    }
 
    @Override
@@ -72,7 +114,14 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
    @Override
    public String toString() {
       // TODO: Implement this.
-      return "";
+
+      StringBuilder builder = new StringBuilder();
+        builder.append("[");
+
+        
+
+        builder.append("]");
+        return builder.toString();
    }
    
 }

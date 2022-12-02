@@ -4,7 +4,7 @@ package oy.tol.tra;
 /**
  * An implementation of the StackInterface.
  * <p>
- * TODO: Students, implement this so that the tests pass.
+ * DONE: Students, implement this so that the tests pass.
  * 
  * Note that you need to implement construtor(s) for your concrete StackImplementation, which
  * allocates the internal Object array for the Stack:
@@ -14,7 +14,7 @@ package oy.tol.tra;
  */
 public class StackImplementation<E> implements StackInterface<E> {
 
-   // TODO: Add member variables needed.
+   // DONE: Add member variables needed.
    // Do not use constant values in code, e.g. 10. Instead, define a constant for that. For example:
    // private static final int MY_CONSTANT_VARIABLE = 10;
    
@@ -31,7 +31,7 @@ public class StackImplementation<E> implements StackInterface<E> {
       this(10);
    }
 
-   /** TODO: Implement so that
+   /** DONE: Implement so that
     * - if the size is less than 2, throw StackAllocationException
     * - if the allocation of the array throws with Java exception,
     *   throw StackAllocationException.
@@ -55,14 +55,12 @@ public class StackImplementation<E> implements StackInterface<E> {
 
    @Override
    public int capacity() {
-      // TODO: Implement this
       
       return capacity;
    }
 
    @Override
    public void push(E element) throws StackAllocationException, NullPointerException {
-      // TODO: Implement this
 
       if(element==null){
          throw new NullPointerException("Cannot push null elements to stack");
@@ -93,7 +91,6 @@ public class StackImplementation<E> implements StackInterface<E> {
    @SuppressWarnings("unchecked")
    @Override
    public E peek() throws StackIsEmptyException {
-      // TODO: Implement this
 
       if(isEmpty()){
          throw new StackIsEmptyException("Cannot peek from empty Stack.");
@@ -104,7 +101,6 @@ public class StackImplementation<E> implements StackInterface<E> {
 
    @Override
    public int size() {
-      // TODO: Implement this
       
       int size = currentIndex + 1;
       return size;
@@ -112,7 +108,6 @@ public class StackImplementation<E> implements StackInterface<E> {
 
    @Override
    public void clear() {
-      // TODO: Implement this
 
       currentIndex = -1;
       itemArray = new Object[capacity];
@@ -120,13 +115,12 @@ public class StackImplementation<E> implements StackInterface<E> {
 
    @Override
    public boolean isEmpty() {
-      // TODO: Implement this
+
       return currentIndex < 0;
    }
 
    @Override
    public String toString() {
-      // TODO: Implement this
 
       StringBuilder builder = new StringBuilder();
       builder.append("[");

@@ -88,8 +88,7 @@ public class QueueImplementation<E> implements QueueInterface<E> {
     @Override
     public int size(){
 
-        int size = count;
-        return size;
+        return count;
     }
 
     @Override
