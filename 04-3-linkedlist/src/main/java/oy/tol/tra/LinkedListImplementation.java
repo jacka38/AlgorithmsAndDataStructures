@@ -1,6 +1,5 @@
 package oy.tol.tra;
 
-import java.util.Currency;
 
 public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
@@ -18,12 +17,11 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
    }
 
    private Node<E> head = null;
-   private int size = 0;
-   private int count;
+   private int count = 0;
 
    @Override
    public void add(E element) throws NullPointerException, LinkedListAllocationException {
-      // TODO: Implement this.
+
       if(null == head){
          head = new Node<E>(element);
          count++;
@@ -39,7 +37,6 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    @Override
    public void add(int index, E element) throws NullPointerException, LinkedListAllocationException, IndexOutOfBoundsException {
-      // TODO: Implement this.
 
       if(index < 0 || index > count){
          throw new IndexOutOfBoundsException("Index is wrong for this linked list");
@@ -75,8 +72,34 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    @Override
    public E remove(int index) throws IndexOutOfBoundsException {
-      // TODO: Implement this.
-      return null;
+
+      if(index < 0 || index >= count){
+         throw new IndexOutOfBoundsException("Index is wrong for this linked list");
+      }
+
+      E removed = null;
+      if(index == 0){
+         removed = head.element;
+         head = head.next;
+         count--;
+      }else{
+         int counter = 1;
+         Node<E> current = head.next;
+         Node<E> previous = head;
+
+         while(current != null){
+            if(counter == index){
+               removed = current.element;
+               previous.next = current.next;
+               count--;
+               break;
+            }
+            counter++;
+            previous = current;
+            current = current.next;
+         }
+      }
+      return removed;
    }
 
    @Override
@@ -93,9 +116,8 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    @Override
    public int size() {
-      // TODO: Implement this.
-      size = count;
-      return size;
+
+      return count + 1;
    }
 
    @Override
