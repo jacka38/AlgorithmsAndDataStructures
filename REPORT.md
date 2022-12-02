@@ -34,7 +34,7 @@ Sain ensikosketuksen predikaatin käytössä.
 Ymmärrän Stack algoritmia nyt ja ymmärrän miten se toimii. Geneerisyyden ymmärrys syventyi hiukan jälleen.
 
 ## 04-2-queue
-
+Ymmärrän queue algoritmia nyt ja opin myös Timerin käyttöä. 
 
 ## 04-3-linkedlist
 
