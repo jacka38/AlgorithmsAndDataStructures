@@ -16,7 +16,7 @@ public class QueueFactory {
     * @return The queue object.
     */
    public static QueueInterface<Integer> createIntegerQueue(int capacity) {
-      // TODO: Implement this when you have finished your QueueImplementation.
+      // DONE: Implement this when you have finished your QueueImplementation.
       // - Instantiates your queue implementation using Integer as template parameter, 
       //   with the given capacity,
       // - and return the object to the caller.

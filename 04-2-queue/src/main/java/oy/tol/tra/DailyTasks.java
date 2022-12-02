@@ -12,6 +12,7 @@ public class DailyTasks {
    private QueueInterface<String> dailyTaskQueue = null;
    private Timer timer = null;
    private static final int TASK_DELAY_IN_SECONDS = 1 * 1000;
+   private static final int MAX_DAILY_TASKS = 100;
 
    private DailyTasks() {
    }
@@ -26,39 +27,44 @@ public class DailyTasks {
    }
 
    private void run() {
-      // TODO: Uncomment the try / catch when finishing the implementation below!
-      // try {
-         // TODO: Fill in the missing empty lines with correct functional code!
+
+      try {
          
-         // 1. create a queue (to the member variable!) for daily tasks, which are strings.
+         this.dailyTaskQueue = new QueueImplementation<>();
+         readTasks();
+         timer = new Timer();
 
-         // 2. read the tasks for today by calling readTasks() -- implementing missing parts of it!
+         timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+               if(dailyTaskQueue.size() > 0){
+                  System.out.println("Time to: " + dailyTaskQueue.dequeue());
+               }else{
+                  timer.cancel();
+                  System.out.println("Tasks done for today, see you tommorrow.");
+               }
+            }
+         }, TASK_DELAY_IN_SECONDS, TASK_DELAY_IN_SECONDS);
 
-         // 3. create Java Timer object (to member variable!!) to schedule your daily tasks.
-
-         // 4. schedule the timer at fixed rate (!!!!) with a new TimerTask,
-         //  using the delay constant values in the class member variable.
-
-         // 4.1 in the timer task run:
-
-               // 4.1.1 check if there are tasks in the queue:
-               // 4.1.2 if yes, print the task from the queue, dequeueing it.
-               // 4.1.3 if not, cancel the timer.
-
-      // } catch (IOException e) {
-      //    System.out.println("Something went wrong :( " + e.getLocalizedMessage());
-      // }
+      } catch (IOException e) {
+         System.out.println("Something went wrong :( " + e.getLocalizedMessage());
+      }
    }
 
    private void readTasks() throws IOException {
+
+      int counter = 0;
       String tasks;
       tasks = new String(getClass().getClassLoader().getResourceAsStream("DailyTasks.txt").readAllBytes());
       String[] allTasks = tasks.split("\\r?\\n");
+
       for (String task : allTasks) {
-         // TODO: Enqueue the task to your Queue implementation:
-
+         dailyTaskQueue.enqueue(task);
+         counter++;
+         if(counter >= MAX_DAILY_TASKS){
+            break;
+         }
       }
-      // TODO: print out to the console the number of tasks in the queue:
-
+      System.out.println("Tasks in queue: " + counter);
    }
 }
