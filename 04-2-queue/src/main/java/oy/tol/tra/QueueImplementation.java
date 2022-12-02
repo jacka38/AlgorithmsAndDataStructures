@@ -39,6 +39,10 @@ public class QueueImplementation<E> implements QueueInterface<E> {
     @Override
     public void enqueue(E element) throws QueueAllocationException, NullPointerException {
 
+        if(element == null){
+            throw new NullPointerException("Cannot enqueue null elements to queue");
+        }
+
         if(count >= capacity){
             reallocateArray();
         }
@@ -84,7 +88,7 @@ public class QueueImplementation<E> implements QueueInterface<E> {
     @Override
     public int size(){
 
-        int size = count + 1;
+        int size = count;
         return size;
     }
 
