@@ -50,11 +50,51 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         count++;
     }
 
+
+    @SuppressWarnings("unchecked")
     @Override
     public E dequeue() throws QueueIsEmptyException {
-        //TODO:
+        
+        if(isEmpty()){
+            throw new QueueIsEmptyException("Cannot dequeue from empty queue");
+        }
+
+        E element = (E) itemArray[head];
+        itemArray[head] = null;
+        count--;
+        head++;
+        if(head >= capacity){
+            head = 0;
+        }
+        return element;
     }
 
+    @SuppressWarnings("unchecked")
+    @Override
+    public E element() throws QueueIsEmptyException{
+
+        if(isEmpty()){
+            throw new QueueIsEmptyException("Cannot return head from empty queue");
+        }
+
+        E element = (E) itemArray[head];
+        return element; 
+    }
+
+    @Override
+    public int size(){
+
+        int size = count + 1;
+        return size;
+    }
+
+    @Override
+    public boolean isEmpty(){
+
+        return count <= 0;
+    }
+
+    @Override
     public void clear(){
 
         capacity = 10;
@@ -62,6 +102,34 @@ public class QueueImplementation<E> implements QueueInterface<E> {
         tail = 0;
         count = 0;
         itemArray = new Object[capacity];
+    }
+
+    @Override
+    public String toString(){
+        
+        StringBuilder builder = new StringBuilder();
+        builder.append("[");
+
+        if(count > 0){
+            int index = head;
+            int counter = count;
+
+            while(counter > 0){
+                builder.append(itemArray[index]);
+                index++;
+                counter--;
+
+                if(counter > 0){
+                    builder.append(", ");
+                }
+                if(index >= capacity){
+                    index = 0;
+                }
+            }
+        }
+
+        builder.append("]");
+        return builder.toString();
     }
 
     private void reallocateArray(){
