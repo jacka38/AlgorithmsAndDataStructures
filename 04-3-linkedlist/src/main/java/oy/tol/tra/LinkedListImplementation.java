@@ -17,10 +17,12 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
    }
 
    private Node<E> head;
+   private Node<E> tail;
    private int count;
 
    public LinkedListImplementation(){
       this.head = null;
+      this.tail = null;
       this.count = 0;
    }
 
@@ -180,8 +182,19 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    @Override
    public void reverse() {
-      // TODO: implement this only when doing the task explained the TASK-2.md.
-      // This method is not needed in doing the task in the README.md.
+      
+      Node<E> current = head;
+      Node<E> previous = null;
+      Node<E> next = null;
+
+      while(current != null){
+         next = current.next;
+         current.next = previous;
+         previous = current;
+         current = next;
+      }
+      tail = head;
+      head = previous;
    }
 
    @Override
