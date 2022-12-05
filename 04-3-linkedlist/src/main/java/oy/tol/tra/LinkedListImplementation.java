@@ -16,8 +16,13 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
       }
    }
 
-   private Node<E> head = null;
-   private int count = 0;
+   private Node<E> head;
+   private int count;
+
+   public LinkedListImplementation(){
+      this.head = null;
+      this.count = 0;
+   }
 
    @Override
    public void add(E element) throws NullPointerException, LinkedListAllocationException {
@@ -66,7 +71,30 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    @Override
    public boolean remove(E element) throws NullPointerException {
-      // TODO: Implement this.
+
+      Node<E> current = head;
+
+      if(element == null){
+         throw new NullPointerException("Element is null");
+      }
+
+      if(current == null){
+         return false;
+      }
+
+      if(current.element.equals(element)){
+         current = current.next;
+         return true;
+      }
+      
+      while(current.next != null){
+         if(current.next.element.equals(element)){
+            current = current.next;
+            current = current.next;
+            return true;
+         }
+         current = current.next;
+      }
       return false;
    }
 
@@ -104,27 +132,50 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    @Override
    public E get(int index) throws IndexOutOfBoundsException {
-      // TODO: Implement this.
-      return null;
+
+      if(index < 0 || index >= count){
+         throw new IndexOutOfBoundsException("Index is wrong for this linked list");
+      }
+
+      Node<E> current = head;
+
+      for(int i = 0; i < index; i++){
+         current = current.next;
+      }
+
+      return current.element;
    }
 
    @Override
    public int indexOf(E element) throws NullPointerException {
-      // TODO: Implement this.
+
+      if(element == null){
+         throw new NullPointerException("Element is null");
+      }
+      int index = 0;
+      Node<E> temp = head;
+
+      while(temp != null){
+         if(temp.element.equals(element)){
+            return index;
+         }
+         index++;
+         temp = temp.next;
+      }
       return -1;
    }
 
    @Override
    public int size() {
 
-      return count + 1;
+      return count;
    }
 
    @Override
    public void clear() {
-      // TODO: Implement this.
 
-      Node<E> head = null;
+      head = null;
+      count = 0;
    }
 
    @Override
@@ -135,15 +186,22 @@ public class LinkedListImplementation<E> implements LinkedListInterface<E> {
 
    @Override
    public String toString() {
-      // TODO: Implement this.
 
       StringBuilder builder = new StringBuilder();
-        builder.append("[");
+      builder.append("[");
 
-        
+      Node<E> current = head;
 
-        builder.append("]");
-        return builder.toString();
+      while(current != null){
+         builder.append(current.element);
+
+         if(current.next != null){
+            builder.append(", ");
+         }
+         current = current.next;
+      }
+
+      builder.append("]");
+      return builder.toString();
    }
-   
 }
