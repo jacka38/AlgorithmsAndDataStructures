@@ -128,23 +128,22 @@ public class Algorithms<T extends Comparable<T>>{
 
         if (fromArray == null || fromArray.length == 0 || fromIndex < 0 || toIndex >= fromArray.length || fromIndex > toIndex) {
             return -1;
-        }
+          }
         
-        int low = fromIndex;
-        int high = toIndex;
+          int low = fromIndex;
+          int high = toIndex;
         
-        while (low <= high) {
-
+          while (low <= high) {
             int mid = low + ((high - low) / 2);
-
-            if(aValue.compareTo(fromArray[mid]) < 0) {
-                high = mid - 1;
-            }else if(aValue.compareTo(fromArray[mid]) > 0) {
-                low = mid + 1;
-            }else{
-                return mid;
+            if (aValue.compareTo(fromArray[mid]) < 0) {
+              high = mid - 1;
+            } else if (aValue.compareTo(fromArray[mid]) > 0) {
+              low = mid + 1;
+            } else {
+              return mid;
             }
-        }
+          }
+
         return -1;
     }
 }
