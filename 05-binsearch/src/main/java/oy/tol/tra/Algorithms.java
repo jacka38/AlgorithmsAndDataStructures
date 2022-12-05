@@ -126,7 +126,7 @@ public class Algorithms<T extends Comparable<T>>{
 
     public static <T extends Comparable<T>> int binarySearch(T aValue, T [] fromArray, int fromIndex, int toIndex) {
 
-        if (fromArray == null || fromArray.length == 0 || fromIndex < 0 || toIndex >= fromArray.length || fromIndex > toIndex) {
+        if(fromArray == null || fromArray.length == 0 || fromIndex < 0 || toIndex >= fromArray.length || fromIndex > toIndex){
             return -1;
         }
         
