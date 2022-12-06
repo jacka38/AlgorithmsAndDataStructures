@@ -141,8 +141,13 @@ public class InvoiceInspector {
       Calendar dueDate = Calendar.getInstance();
       dueDate.set(Calendar.MONTH, dueDate.get(Calendar.MONTH)+1);
       long dueDateValue = dueDate.getTime().getTime();
-
+      
       // TODO: Add your algorithm here!
-   }
+      
 
+      Algorithms.fastSort(invoices);
+      Algorithms.fastSort(payments);
+      
+      
+   }
 }

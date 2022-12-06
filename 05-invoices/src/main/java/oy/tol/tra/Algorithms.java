@@ -146,5 +146,39 @@ public class Algorithms<T extends Comparable<T>>{
 
         return -1;
     }
+
+
+    public static <E extends Comparable<E>> void fastSort(E[] array) {
+        if (array == null || array.length == 0) {
+            return;
+        }
+    
+        fastSort(array, 0, array.length - 1);
+    }
+    
+    private static <E extends Comparable<E>> void fastSort(E[] array, int low, int high) {
+        if (low >= high) {
+            return;
+        }
+    
+        int pivotIndex = partition(array, low, high);
+        fastSort(array, low, pivotIndex - 1);
+        fastSort(array, pivotIndex + 1, high);
+    }
+    
+    private static <E extends Comparable<E>> int partition(E[] array, int low, int high) {
+        int pivotIndex = low + ((high - low) / 2);
+        swap(array, pivotIndex, high);
+    
+        int i = low;
+        for (int j = low; j < high; j++) {
+            if (array[j].compareTo(array[high]) <= 0) {
+                swap(array, i, j);
+                i++;
+            }
+        }
+        swap(array, i, high);
+        return i;
+    }
 }
 
