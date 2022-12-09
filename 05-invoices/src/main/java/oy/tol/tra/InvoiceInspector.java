@@ -143,11 +143,24 @@ public class InvoiceInspector {
       long dueDateValue = dueDate.getTime().getTime();
       
       // TODO: Add your algorithm here!
-      
 
-      Algorithms.fastSort(invoices);
-      Algorithms.fastSort(payments);
-      
-      
+      Algorithms.fastSort(invoices, 0, invoices.length-1);
+      Algorithms.fastSort(payments, 0, payments.length-1);
+
+      for(int i = 0; i < invoices.length; i++){
+         Invoice invoice = invoices[i];
+         boolean noPaymentForInvoiceFound = true;
+         int foundIndex = Algorithms.binarySearch(invoice.number, payments, 0, payments.length - 1);
+         if(foundIndex != -1){
+            noPaymentForInvoiceFound = false;
+            Payment payment = payments[foundIndex];
+            if(invoice.sum.compareTo(payment.sum) > 0){
+               toCollect.add(new Invoice(invoice.number, invoice.sum - payment.sum, dueDateValue));
+            }
+         }
+         if(noPaymentForInvoiceFound){
+            toCollect.add(invoice);
+         }
+      }
    }
 }

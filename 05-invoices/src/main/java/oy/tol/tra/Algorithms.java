@@ -124,27 +124,26 @@ public class Algorithms<T extends Comparable<T>>{
         return index;
     }
 
-    public static <T extends Comparable<T>> int binarySearch(T aValue, T [] fromArray, int fromIndex, int toIndex) {
+    public static int binarySearch(int aValue, Payment [] fromArray, int fromIndex, int toIndex) {
+        
+        int low = fromIndex;
+        int high = toIndex;
+        int mid = low + ((high - low) / 2);
+        
+        Payment payment = fromArray[mid];
 
-        if (fromArray == null || fromArray.length == 0 || fromIndex < 0 || toIndex >= fromArray.length || fromIndex > toIndex) {
+        if(low > high){
             return -1;
-          }
-        
-          int low = fromIndex;
-          int high = toIndex;
-        
-          while (low <= high) {
-            int mid = low + ((high - low) / 2);
-            if (aValue.compareTo(fromArray[mid]) < 0) {
-              high = mid - 1;
-            } else if (aValue.compareTo(fromArray[mid]) > 0) {
-              low = mid + 1;
-            } else {
-              return mid;
-            }
-          }
-
-        return -1;
+        }
+        if(aValue == payment.number){
+            return mid;
+        }
+        else if(aValue > payment.number){
+            return binarySearch(aValue, fromArray, mid + 1, high);
+        }
+        else{
+            return binarySearch(aValue, fromArray, low, mid - 1);
+        }
     }
 
 
@@ -156,7 +155,7 @@ public class Algorithms<T extends Comparable<T>>{
         fastSort(array, 0, array.length - 1);
     }
     
-    private static <E extends Comparable<E>> void fastSort(E[] array, int low, int high) {
+    static <E extends Comparable<E>> void fastSort(E[] array, int low, int high) {
         if (low >= high) {
             return;
         }
