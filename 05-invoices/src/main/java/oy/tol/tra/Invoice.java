@@ -40,4 +40,7 @@ class Invoice implements Comparable<Invoice>  {
         return number.hashCode();
     }
 
+    public Payment getPaymentNumber(){
+        return new Payment(number, sum);
+    }
 }

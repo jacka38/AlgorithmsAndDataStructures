@@ -124,25 +124,25 @@ public class Algorithms<T extends Comparable<T>>{
         return index;
     }
 
-    public static int binarySearch(int aValue, Payment [] fromArray, int fromIndex, int toIndex) {
-        
+    
+    public static <T extends Comparable<T>> int binarySearch(T aValue, T [] fromArray, int fromIndex, int toIndex) {
+    
         int low = fromIndex;
         int high = toIndex;
-        int mid = low + ((high - low) / 2);
-        
-        Payment payment = fromArray[mid];
 
-        if(low > high){
-            return -1;
-        }
-        if(aValue == payment.number){
-            return mid;
-        }
-        else if(aValue > payment.number){
-            return binarySearch(aValue, fromArray, mid + 1, high);
-        }
-        else{
-            return binarySearch(aValue, fromArray, low, mid - 1);
+        if(low == high){
+            if(aValue.compareTo(fromArray[low]) == 0){
+                return low;
+            }else{
+                return -1;
+            }
+        }else{
+            int mid = low + ((high - low) / 2);
+            if(aValue.compareTo(fromArray[mid]) <= 0){
+                return binarySearch(aValue, fromArray, low, mid);
+            }else{
+                return binarySearch(aValue, fromArray, mid + 1, high);
+            }
         }
     }
 

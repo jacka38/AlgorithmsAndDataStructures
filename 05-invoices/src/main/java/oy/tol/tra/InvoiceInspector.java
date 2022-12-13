@@ -150,7 +150,7 @@ public class InvoiceInspector {
       for(int i = 0; i < invoices.length; i++){
          Invoice invoice = invoices[i];
          boolean noPaymentForInvoiceFound = true;
-         int foundIndex = Algorithms.binarySearch(invoice.number, payments, 0, payments.length - 1);
+         int foundIndex = Algorithms.binarySearch(invoice.getPaymentNumber(), payments, 0, payments.length - 1);
          if(foundIndex != -1){
             noPaymentForInvoiceFound = false;
             Payment payment = payments[foundIndex];
