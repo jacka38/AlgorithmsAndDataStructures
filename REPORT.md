@@ -37,10 +37,10 @@ Ymmärrän Stack algoritmia nyt ja ymmärrän miten se toimii. Geneerisyyden ymm
 Ymmärrän queue algoritmia nyt ja opin myös Timerin käyttöä. 
 
 ## 04-3-linkedlist
-Ensimmöinen kosketus LinkedListaan kokonaisuudessaan ja tämän tehtävän avulla opin mielestäni suhteellisen hyvin algoritmin idean. 
+Ensimmäinen kosketus LinkedListaan kokonaisuudessaan ja tämän tehtävän avulla opin mielestäni suhteellisen hyvin algoritmin idean. 
 
 ## 05-binsearch
-
+Kiinnostavaa luoda uusi nopeampi toteutus verrattuna aikaisempaan. 
 
 ## 05-invoices
 
