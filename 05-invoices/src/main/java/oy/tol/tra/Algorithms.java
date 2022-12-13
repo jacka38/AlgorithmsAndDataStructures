@@ -146,37 +146,34 @@ public class Algorithms<T extends Comparable<T>>{
         }
     }
 
-
-    public static <E extends Comparable<E>> void fastSort(E[] array) {
-        if (array == null || array.length == 0) {
-            return;
-        }
-    
+    public static <E extends Comparable<E>> void fastSort(Comparable<E>[] array) {
         fastSort(array, 0, array.length - 1);
     }
-    
-    static <E extends Comparable<E>> void fastSort(E[] array, int low, int high) {
-        if (low >= high) {
-            return;
+      
+    static <E extends Comparable<E>> void fastSort(Comparable<E>[] array, int start, int end) {
+        
+        if (start >= end) {
+          return;
         }
-    
-        int pivotIndex = partition(array, low, high);
-        fastSort(array, low, pivotIndex - 1);
-        fastSort(array, pivotIndex + 1, high);
+        
+        int pivotIndex = partition(array, start, end);
+        fastSort(array, start, pivotIndex - 1);
+        fastSort(array, pivotIndex + 1, end);
     }
     
-    private static <E extends Comparable<E>> int partition(E[] array, int low, int high) {
-        int pivotIndex = low + ((high - low) / 2);
-        swap(array, pivotIndex, high);
-    
-        int i = low;
-        for (int j = low; j < high; j++) {
-            if (array[j].compareTo(array[high]) <= 0) {
+    @SuppressWarnings("unchecked")
+    private static <E extends Comparable<E>> int partition(Comparable<E>[] array, int start, int end) {
+        
+        E pivot = (E) array[end];
+        int i = start;
+        
+        for (int j = start; j < end; j++) {
+            if (array[j].compareTo(pivot) < 0) {
                 swap(array, i, j);
                 i++;
             }
         }
-        swap(array, i, high);
+        swap(array, i, end);
         return i;
     }
 }
