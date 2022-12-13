@@ -18,7 +18,9 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
+@Timeout(720)
 @DisplayName("Basic tests for the Phone book.")
 public class PhoneBookTests {
 

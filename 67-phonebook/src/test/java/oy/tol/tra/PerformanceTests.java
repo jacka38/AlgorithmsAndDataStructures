@@ -16,8 +16,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
+import org.junit.jupiter.api.Timeout;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
+@Timeout(720)
 @TestMethodOrder(OrderAnnotation.class)
 @DisplayName("Performance yests using different implementations and file sizes")
 public class PerformanceTests {

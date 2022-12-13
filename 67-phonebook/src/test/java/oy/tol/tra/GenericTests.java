@@ -14,9 +14,11 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Timeout;
 
 import oy.tol.tra.Dictionary.Type;
 
+@Timeout(60)
 @DisplayName("Testing that the implementations are really generic.")
 public class GenericTests {
 
