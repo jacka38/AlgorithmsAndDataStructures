@@ -1,6 +1,6 @@
 package oy.tol.tra;
 
-public class Person {
+public class Person implements Comparable<Person>{
     private String firstName;
     private String lastName;
 
@@ -22,4 +22,33 @@ public class Person {
     }
 
     // TODO: Implement equals(), hashCode() and Comparable interface.
+
+    @Override
+    public boolean equals(Object person) {
+        
+        if (this == person){
+            return true;
+        } 
+
+        if (person == null || getClass() != person.getClass()){
+            return false;
+        }
+        Person o = (Person) person;
+
+        return firstName.equals(o.firstName) && lastName.equals(o.lastName);
+    }
+
+    public int hashCode() {
+        int result = 17;
+        result = 31 * result + firstName.hashCode();
+        result = 31 * result + lastName.hashCode();
+        return result;
+    }
+    
+    
+    @Override
+    public int compareTo(Person person) {
+        int lastNameCmp = lastName.compareTo(person.lastName);
+        return lastNameCmp != 0 ? lastNameCmp : firstName.compareTo(person.firstName);
+    }
 }
