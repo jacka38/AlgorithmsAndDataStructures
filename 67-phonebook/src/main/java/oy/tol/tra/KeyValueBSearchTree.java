@@ -1,6 +1,5 @@
 package oy.tol.tra;
 
-
 public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionary<K, V> {
 
     // This is the BST implementation, KeyValueHashTable has the hash table implementation
@@ -8,13 +7,13 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
     private TreeNode root;
     private int count;
     private int maxDepth = 0;
-    private int maxCollisionChaninLength = 0;
+    private int maxCollisionChainLength = 0;
 
     public KeyValueBSearchTree(){
         this.root = null;
         this.count = count;
         this.maxDepth = maxDepth;
-        this.maxCollisionChaninLength = maxCollisionChaninLength;
+        this.maxCollisionChainLength = maxCollisionChainLength;
     }
 
     @Override
@@ -24,7 +23,7 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
  
     @Override
     public int size() {
-        // TODO: Implement this!
+
         return count;
     }
 
@@ -43,27 +42,29 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
         StringBuilder builder = new StringBuilder();
 
         builder.append("Count of tree nodes in BST " + count + "\n");
-        builder.append("BST max value " + Integer.MAX_VALUE + "\n");
         builder.append("Max depth in BST is " + maxDepth + "\n");
-        builder.append("Max collision in BST is " + maxCollisionChaninLength + "\n");
+        builder.append("Max collision in BST is " + maxCollisionChainLength + "\n");
 
         return builder.toString();
     }
 
     @Override
     public boolean add(K key, V value) throws IllegalArgumentException, OutOfMemoryError {
-        // TODO: Implement this!
 
         if(null == root){
             root = new TreeNode(key, value);
             count++;
             maxDepth = 1;
-            maxCollisionChaninLength = 0;
+            maxCollisionChainLength = 0;
             return true;
         }else{
+            TreeNode.addDepth = 1;
+            maxCollisionChainLength = 0;
             int added = root.insert(key, value, key.hashCode());
             if(added > 0){
                 count++;
+                maxDepth = Math.max(TreeNode.addDepth, maxDepth);
+                maxCollisionChainLength = Math.max(TreeNode.collisionChainLength, maxCollisionChainLength);
                 return true;
             }
         }
@@ -73,7 +74,6 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
 
     @Override
     public V find(K key) throws IllegalArgumentException {
-        // TODO: Implement this!
 
         if(null == root){
             return null;
@@ -94,8 +94,8 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
 
     
     @Override
+    @SuppressWarnings("unchecked")
     public Pair<K,V> [] toSortedArray() {
-        // TODO: Implement this!
 
         if(null == root){
             return null;
@@ -103,7 +103,7 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
         
         Pair<K,V>[] returnArray = (Pair<K,V>[])new Pair[count];
         int toAddIndex = 0;
-        root.toSortedArray(returnArray);
+        root.toSortedArray(returnArray, null);
         Algorithms.fastSort(returnArray);
         return returnArray;
     }
@@ -115,12 +115,39 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
         private Pair<K, V> keyValue;
         private TreeNode<K, V> left;
         private TreeNode<K, V> right;
+        private LinkedListImplementation<Pair<K,V>> collisionChain;
+
+        public static int addDepth = 0;
+        public static int collisionChainLength = 0;
+        
 
         TreeNode(K key, V value){
             this.keyValue = new Pair<K, V>(key, value);
             this.hash = key.hashCode();
             this.left = null;
             this.right = null;
+            this.collisionChain = null;
+        }
+
+        @SuppressWarnings("unchecked")
+        void toSortedArray(Pair<K,V>[] array, int[] toAddIndex) {
+            if (left != null) {
+                left.toSortedArray(array, toAddIndex);
+            }
+            array[toAddIndex[0]++] = (Pair<K, V>)new Pair(keyValue, toAddIndex);
+            
+            if (collisionChain != null) {
+                for (int index = 0; index < collisionChain.size(); index++) {
+                    Pair<K,V> found = collisionChain.get(index);
+                    if (found != null) {
+                        array[toAddIndex[0]++] = new Pair<>(found.getKey(), found.getValue());
+                    }
+                }
+            }
+            
+            if (right != null) {
+                right.toSortedArray(array, toAddIndex);
+            }
         }
 
         int insert(K key, V value, int keyToSearch){
@@ -128,15 +155,19 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
             if(keyToSearch < this.hash){
                 if(null == left){
                     left = new TreeNode(key, value);
+                    TreeNode.addDepth += 1;
                     added = 1;
                 }else{
+                    TreeNode.addDepth += 1;
                     added = left.insert(key, value, keyToSearch);
                 }
             }else if(keyToSearch > this.hash){
                 if(null == right){
                     right = new TreeNode(key, value);
+                    TreeNode.addDepth += 1;
                     added = 1;
                 }else{
+                    TreeNode.addDepth += 1;
                     added = right.insert(key, value, keyToSearch);
                 }
             }else{
@@ -144,6 +175,24 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
                     keyValue.setvalue(value);
                 }else{
                     //TODO:
+                    if(null == collisionChain){
+                        collisionChain = new LinkedListImplementation<Pair<K,V>>();
+                        collisionChain.add(new Pair<>(key, value));
+                        added = 1;
+                        collisionChainLength = 1;
+                    }else if(collisionChain.size() > 0){
+                        
+                        int index = collisionChain.indexOf(keyValue);
+                        if(index < 0){
+                            collisionChain.add(new Pair<K, V>(key, value));
+                            added = 1;
+                        }else{
+                            collisionChain.remove(index);
+                            collisionChain.add(new Pair<K, V>(key, value));
+                        }
+                        TreeNode.collisionChainLength = collisionChain.size();
+                    }
+                    
                 }
             }
         return added;
@@ -166,6 +215,13 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
                     return keyValue.getValue();
                 }else{
                     //TODO:
+                    if(null != collisionChain){
+                        
+                        int index = collisionChain.indexOf(keyValue);
+                        if(index >= 0){
+                            return collisionChain.get(index).getValue();
+                        }
+                    }
                 }
             }
         return result;
