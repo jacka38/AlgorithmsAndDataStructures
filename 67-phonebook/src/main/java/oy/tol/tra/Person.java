@@ -45,7 +45,6 @@ public class Person implements Comparable<Person>{
         return result;
     }
     
-    
     @Override
     public int compareTo(Person person) {
         int lastNameCmp = lastName.compareTo(person.lastName);

@@ -40697,12 +40697,12 @@ Tjay,Angelico,372,045,7065047
 Aiden-Jack,Balducci,358,042,7096600
 Cole,Matisse,20,020,7080480
 Zion,Manet,372,045,7061119
+Akseli,Gallen-Kallela,380,020,7059879
 Mantej,Gallen-Kallela,39,040,7030478
 Masood,Picasso,1,020,7033320
 Lyall,Thesleff,1,050,7039791
 Roen,Gentileschi,358,050,7039571
 Ashtyn,Velázquez,1,042,7081096
-Akseli,Gallen-Kallela,380,020,7059879
 Makenzie,Tiepolo,212,042,7046057
 James-Paul,Matisse,380,045,7059774
 Stefano,Anguissola,372,040,7111277
