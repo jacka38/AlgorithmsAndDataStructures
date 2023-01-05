@@ -1,5 +1,7 @@
 package oy.tol.tra;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionary<K, V> {
 
     // This is the BST implementation, KeyValueHashTable has the hash table implementation
@@ -49,6 +51,10 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
     @Override
     @SuppressWarnings("unchecked")
     public boolean add(K key, V value) throws IllegalArgumentException, OutOfMemoryError {
+
+        if(key == null){
+            throw new IllegalArgumentException("paramaters cannot be null");
+        }
 
         if(null == root){
             root = new TreeNode(key, value);
@@ -102,8 +108,8 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
         }
         
         Pair<K,V>[] returnArray = (Pair<K,V>[])new Pair[count];
-        int toAddIndex = 0;
-        root.toSortedArray(returnArray, null);
+        AtomicInteger toAddIndex = new AtomicInteger();
+        root.toSortedArray(returnArray, toAddIndex);
         Algorithms.fastSort(returnArray);
         return returnArray;
     }
@@ -129,19 +135,18 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
             this.collisionChain = null;
         }
 
-        @SuppressWarnings("unchecked")
-        void toSortedArray(Pair<K,V>[] array, int toAddIndex) {
+        void toSortedArray(Pair<K,V>[] array, AtomicInteger toAddIndex) {
 
             if (left != null) {
                 left.toSortedArray(array, toAddIndex);
             }
-            array[toAddIndex++] = new Pair<>(keyValue.getKey(), keyValue.getValue());
+            array[toAddIndex.getAndIncrement()] = new Pair<>(keyValue.getKey(), keyValue.getValue());
 
             if (collisionChain != null) {
                 for (int index = 0; index < collisionChain.size(); index++) {
                     Pair<K,V> found = collisionChain.get(index);
                     if (null != found) {
-                        array[toAddIndex++] = new Pair<>(found.getKey(), found.getValue());
+                        array[toAddIndex.getAndIncrement()] = new Pair<>(found.getKey(), found.getValue());
                     }
                 }
             }
