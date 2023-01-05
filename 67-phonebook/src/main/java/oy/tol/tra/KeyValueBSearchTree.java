@@ -5,20 +5,18 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
     // This is the BST implementation, KeyValueHashTable has the hash table implementation
     
     private TreeNode root;
-    private int count;
+    private int count = 0;
     private int maxDepth = 0;
     private int maxCollisionChainLength = 0;
 
     public KeyValueBSearchTree(){
         this.root = null;
-        this.count = count;
-        this.maxDepth = maxDepth;
-        this.maxCollisionChainLength = maxCollisionChainLength;
+
     }
 
     @Override
     public Type getType() {
-       return Type.NONE;
+       return Type.BST;
     }
  
     @Override
@@ -49,6 +47,7 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public boolean add(K key, V value) throws IllegalArgumentException, OutOfMemoryError {
 
         if(null == root){
@@ -73,6 +72,7 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public V find(K key) throws IllegalArgumentException {
 
         if(null == root){
@@ -130,17 +130,18 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
         }
 
         @SuppressWarnings("unchecked")
-        void toSortedArray(Pair<K,V>[] array, int[] toAddIndex) {
+        void toSortedArray(Pair<K,V>[] array, int toAddIndex) {
+
             if (left != null) {
                 left.toSortedArray(array, toAddIndex);
             }
-            array[toAddIndex[0]++] = (Pair<K, V>)new Pair(keyValue, toAddIndex);
-            
+            array[toAddIndex++] = new Pair<>(keyValue.getKey(), keyValue.getValue());
+
             if (collisionChain != null) {
                 for (int index = 0; index < collisionChain.size(); index++) {
                     Pair<K,V> found = collisionChain.get(index);
-                    if (found != null) {
-                        array[toAddIndex[0]++] = new Pair<>(found.getKey(), found.getValue());
+                    if (null != found) {
+                        array[toAddIndex++] = new Pair<>(found.getKey(), found.getValue());
                     }
                 }
             }
@@ -150,6 +151,7 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
             }
         }
 
+        @SuppressWarnings("unchecked")
         int insert(K key, V value, int keyToSearch){
             int added = 0;
             if(keyToSearch < this.hash){
@@ -214,7 +216,6 @@ public class KeyValueBSearchTree<K extends Comparable<K>,V> implements Dictionar
                 if(keyValue.getKey().equals(key)){
                     return keyValue.getValue();
                 }else{
-                    //TODO:
                     if(null != collisionChain){
                         
                         int index = collisionChain.indexOf(keyValue);

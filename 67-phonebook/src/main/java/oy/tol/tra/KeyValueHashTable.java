@@ -8,6 +8,8 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
     private int size;
     private int count;  
     private Pair<K,V>[] array; 
+    K key;
+    V value;
     private long collisionCount; 
     private long maxProbingCount; 
     private int reallocateCount = 0;
@@ -17,12 +19,15 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
     }
 
     public KeyValueHashTable() throws OutOfMemoryError {
+        this.array = null;
+        this.key = null;
+        this.value = null;
         ensureCapacity(20);
     }
 
     @Override
     public Type getType() {
-        return Type.NONE;
+        return Type.HASHTABLE;
     }
 
     @SuppressWarnings("unchecked")
@@ -80,6 +85,10 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
         int currentProbingCount = 0;
         boolean added = false;
 
+        if(null == key || null == value){
+            throw new IllegalArgumentException("Key or value cannot be null");
+        }
+
         if(count > (size * LOAD_FACTOR)){
             reallocate(size * 2);
         }
@@ -96,7 +105,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
                 collisionCount++;
                 currentProbingCount++;
             }else{
-                array[index].equals(value);
+                array[index].setvalue(value);
                 added = true;
             }
         }while(!added);
@@ -115,11 +124,16 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
         boolean finished = false;
         V result = null;
         int hashModifier = 0;
+        
+        if(null == key){
+            throw new IllegalArgumentException("key cannot be null");
+        }
 
         do{
+
             int index = indexFor(key, hashModifier);
             if(array[index] != null){
-                if(array[index].equals(key)){
+                if(array[index].getKey().equals(key)){
                     result = array[index].getValue();
                     finished = true;
                 }else{
@@ -131,11 +145,11 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
 
         }while(!finished);
 
-        return result;
+        return result;    
     }
 
     @Override
-    @java.lang.SuppressWarnings({"unchecked"})
+    //@java.lang.SuppressWarnings({"unchecked"})
     public Pair<K,V> [] toSortedArray() {
         // TODO: Implement this!
 
@@ -143,7 +157,10 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
         int addIndex = 0;
         for(int index = 0; index < size; index++){
             if(array[index] != null){
-                toReturn[addIndex++] = (Pair<K, V>)new Pair(array[index], collisionCount);
+                K key = array[index].getKey();
+                V value = array[index].getValue();
+
+                toReturn[addIndex++] = new Pair<K, V>(key, value);
             }
         }
         Algorithms.fastSort(toReturn);
