@@ -33,7 +33,6 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
     @SuppressWarnings("unchecked")
     @Override
     public void ensureCapacity(int size) throws OutOfMemoryError {
-        // TODO: Implement this!
         if(count == 0){
             this.size = size;
             array = (Pair<K,V>[])new Pair[size];
@@ -44,7 +43,6 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
 
     @Override
     public int size() {
-        // TODO: Implement this!
         return count;
     }
 
@@ -61,7 +59,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
      */
     @Override
     public String getStatus() {
-        // TODO: Implement this!
+
         StringBuilder builder = new StringBuilder();
         Double filled = count * 100.00 / size;
         String filledPercent = String.format("%.2f%%", filled);
@@ -79,7 +77,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
 
     @Override
     public boolean add(K key, V value) throws IllegalArgumentException, OutOfMemoryError {
-        // TODO: Implement this!
+
         int index = 0;
         int hashModifier = 0;
         int currentProbingCount = 0;
@@ -120,7 +118,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
 
     @Override
     public V find(K key) throws IllegalArgumentException {
-        // TODO: Implement this!
+
         boolean finished = false;
         V result = null;
         int hashModifier = 0;
@@ -151,7 +149,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
     @Override
     //@java.lang.SuppressWarnings({"unchecked"})
     public Pair<K,V> [] toSortedArray() {
-        // TODO: Implement this!
+
 
         Pair<K,V>[] toReturn = (Pair<K,V>[])new Pair[count];
         int addIndex = 0;
@@ -169,7 +167,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
 
     @Override
     public void compress() throws OutOfMemoryError {
-        // TODO: Implement this!
+
         int newSize = (int) (count * LOAD_FACTOR);
 
         if(newSize < size){
