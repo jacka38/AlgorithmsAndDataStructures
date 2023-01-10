@@ -146,7 +146,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
     }
 
     @Override
-    //@java.lang.SuppressWarnings({"unchecked"})
+    @java.lang.SuppressWarnings({"unchecked"})
     public Pair<K,V> [] toSortedArray() {
 
 
@@ -174,6 +174,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
         }
     }
 
+    @java.lang.SuppressWarnings({"unchecked"})
     private void reallocate(int newSize) throws OutOfMemoryError {
         
         Pair<K, V> [] oldArray = this.array;
