@@ -58,7 +58,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
         builder.append("Current fill rate for hash table is " + filledPercent + "\n");
         builder.append("Hash table had " + collisionCount + " collisions when filling the hash table" + "\n");
         builder.append("Hash table had to reallocate " + reallocateCount + " times while filling the hash table." + "\n");
-        builder.append("Hash table had to proble " + maxProbingCount + " times in the worst case" + "\n");
+        builder.append("Hash table had to probe " + maxProbingCount + " times in the worst case" + "\n");
 
         return builder.toString();
     }
