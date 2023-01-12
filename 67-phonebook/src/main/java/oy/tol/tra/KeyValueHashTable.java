@@ -95,7 +95,7 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
                 added = true;
             }
         }while(!added);
-        maxProbingCount = Math.max(maxProbingCount ,currentProbingCount);
+        maxProbingCount = Math.max(maxProbingCount, currentProbingCount);
 
         return added;
     }

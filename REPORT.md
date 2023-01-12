@@ -64,7 +64,7 @@ V: Kokeilin eri primäärilukuja, mutta en henkilökohtaisesti huomannut mitää
 
 hajautustaulujen kanssa, minkälaisilla täyttöasteilla (fill factor) kokeilit taulukkoa? Nopeutuiko tai hidastuiko käyttö erilaisilla täyttöasteilla?
 
-V: Kokeilin pienempänä 0.5 loadfactoria ja korkeimpana 0.95. Load factor 0.8 jäi sitten käyttöön, kun sillä näytti tulevan hyvä tasapaino nopeuden kanssa ja se myös vähensi turhia taulukon kavatuksia ja törmäyksiä. esim. 0.95 loadfactorilla alkoi kestämään jo pidempää sen takia kun tuli niin paljon törmäyksiä. 
+V: Kokeilin pienimpänä 0.5 loadfactoria ja korkeimpana 0.95. Load factor 0.8 jäi sitten käyttöön, kun sillä näytti tulevan hyvä tasapaino nopeuden kanssa ja se myös vähensi turhia taulukon kavatuksia ja törmäyksiä. esim. 0.95 loadfactorilla alkoi kestämään jo pidempää sen takia kun tuli niin paljon törmäyksiä. 
 
 
 kuinka paljon kasvatit hajautustaulun kokoa aina kerralla kun reallokointia tarvittiin? Nopeuttiko eri ratkaisut toimintaa ja/tai tuliko taulukosta tarpeettoman iso ja muistia tuhlaava (suurin osa siitä jäi tyhjäksi)?
@@ -91,6 +91,8 @@ Minkä lajittelualgoritmin toteutit 05-invoices harjoituksessa, ja käytit täss
 V: Quicksorttia. Quicksort on nopeampi, heapsortilla olisi tullut hitautta kun data määrät kasvaa eli isoimmissa testeissä se olisi ollut huomattavasti hitaampi. Edes quicksortilla, minun ei tarvinnut kasvattaa muistini määrää ohjelmalle. 
 
 Lopuksi, anna myös palautetta kurssista, kurssin tehtävistä ja kommentoi kurssin oppimistavoitteiden saavuttamista omalta kohdaltasi. Kerro myös mitä kurssilla voisi mielestäsi muuttaa jotta se olisi parempi.
+
+V: Olin positiivisesti yllättynyt kurssin rakenteeseen. Olen iloinen että pääsin oppimaan tira kurssilla kurssin aiheiden lisäksi myös perus juttuja kuten gitlabin käyttöä. En valitettavasti keksi mitään parannusehdotusta tällä hetkellä kurssille. 
 
 ## Valinnaiset tehtävät
 
