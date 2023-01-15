@@ -59,7 +59,25 @@ HashTable scatterplot
 
 minkälaisia hajautusfunktioita kokeilit tiivisteiden laskennassa? Tuliko joillakin enemmän törmäyksiä kuin toisilla hajautusfunktioilla?
 
-V: Kokeilin eri primäärilukuja, erilaisia hajautusfunktioita. Ensimmäisenä kokeilin todella yksibnkertaista hajautusfunktiota, jossa tyyli oli hash = hash * 31 * lastName.hashCode(); Tämä oli kelpo, mutta se ei hajauttanut riittävästi. Päätin vaihtaa toteutukseni bit shiftiä käyttävään nykyiseen ratkaisuuni, joka hajautti paremmin.
+V: Kokeilin eri primäärilukuja, erilaisia hajautusfunktioita. Ensimmäisenä kokeilin todella yksinkertaista hajautusfunktiota
+
+Suurimman eron löysin, kun kokeilin myös for looppia.
+Tällä hajautusfunktiolla, minun koodini oli tuplasti hitaampi kuin nykyiselläni.
+    int result = 5381;
+        for(char ch : this.getFullName().toCharArray()) {
+            result = (result * 37 + Character.getNumericValue(ch));
+        }
+    return result;
+
+Tässä nykyinen nopein löytämäni ratkaisu. 
+    int result = 5381;
+
+        result = (result << 5) + result + lastName.hashCode();
+        result = (result << 5) + result + firstName.hashCode();
+        
+    return result;
+
+Syy taitaa löytyäkkin noista getFullName tms. metodien kutsunnoista. Tykkäsin omasta simppelistä ja nopeasta ratkaisustani vaikka törmäyksiä tulikin aika paljon.
 
 
 hajautustaulujen kanssa, minkälaisilla täyttöasteilla (fill factor) kokeilit taulukkoa? Nopeutuiko tai hidastuiko käyttö erilaisilla täyttöasteilla?
@@ -74,7 +92,7 @@ V: kasvatin taulukkoa aina 2x, jotta sille tulisi varmasti riittävästi tilaa j
 
 kuinka syväksi puu muodostui eri hajautusfunktioilla, vai oliko niillä merkitystä? Kokeilitko erilaisia hajautusfunktioita?
 
-V: No esimerkiksi phonebooktestissä puun syvyys oli aluksi 40. Hajautusfunktion muutos, että se sisälti bit shiftauksen ja, että siellä oli mukana suurempi primääriluku tiputti sen 36.
+V: No esimerkiksi phonebooktestissä puun syvyys oli 40. Hajautusfunktion muuttaminen for looppiin hidasti koodia, vaikka pienensi puun syvyyttä. Päätin ottaa syvemmän mutta nopeamman puun.
 
 Millä tavoin hoidit törmäykset hajautustaulussa ja BST:ssä? Kokeilitko erilaisia vaihtoehtoja, ja miksi valitsit sen mikä jäi toteutukseen?
 
