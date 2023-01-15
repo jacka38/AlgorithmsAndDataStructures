@@ -59,7 +59,7 @@ HashTable scatterplot
 
 minkälaisia hajautusfunktioita kokeilit tiivisteiden laskennassa? Tuliko joillakin enemmän törmäyksiä kuin toisilla hajautusfunktioilla?
 
-V: Kokeilin eri primäärilukuja, mutta en henkilökohtaisesti huomannut mitään eroa niiden välillä. Päädyin jäämään ensimmäiseen ja nykyiseen ratkaisuuni.
+V: Kokeilin eri primäärilukuja, erilaisia hajautusfunktioita. Ensimmäisenä kokeilin todella yksibnkertaista hajautusfunktiota, jossa tyyli oli hash = hash * 31 * lastName.hashCode(); Tämä oli kelpo, mutta se ei hajauttanut riittävästi. Päätin vaihtaa toteutukseni bit shiftiä käyttävään nykyiseen ratkaisuuni, joka hajautti paremmin.
 
 
 hajautustaulujen kanssa, minkälaisilla täyttöasteilla (fill factor) kokeilit taulukkoa? Nopeutuiko tai hidastuiko käyttö erilaisilla täyttöasteilla?

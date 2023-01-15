@@ -7,8 +7,6 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
     private int size;
     private int count;  
     private Pair<K,V>[] array; 
-    K key;
-    V value;
     private long collisionCount = 0; 
     private long maxProbingCount = 0; 
     private int reallocateCount = 0;
@@ -19,8 +17,6 @@ public class KeyValueHashTable<K extends Comparable<K>, V> implements Dictionary
 
     public KeyValueHashTable() throws OutOfMemoryError {
         this.array = null;
-        this.key = null;
-        this.value = null;
         ensureCapacity(20);
     }
 

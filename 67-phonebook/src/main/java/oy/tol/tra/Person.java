@@ -39,9 +39,11 @@ public class Person implements Comparable<Person>{
     }
 
     public int hashCode() {
-        int result = 17;
-        result = 31 * result + firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
+
+        int result = 5381;
+        for(char ch : this.getFullName().toCharArray()) {
+            result = (result << 5) + result + ch;
+        }
         return result;
     }
     
