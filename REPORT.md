@@ -62,7 +62,7 @@ minkälaisia hajautusfunktioita kokeilit tiivisteiden laskennassa? Tuliko joilla
 V: Kokeilin eri primäärilukuja, erilaisia hajautusfunktioita. Ensimmäisenä kokeilin todella yksinkertaista hajautusfunktiota
 
 Suurimman eron löysin, kun kokeilin myös for looppia.
-Tällä hajautusfunktiolla, minun koodini oli tuplasti hitaampi kuin nykyiselläni.
+Tällä hajautusfunktiolla, minun koodini oli huomattavasti hitaampi kuin nykyiselläni performancetestissä.
 
     int result = 5381;
         for(char ch : this.getFullName().toCharArray()) {
