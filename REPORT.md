@@ -82,9 +82,11 @@ Tässä nykyinen nopein löytämäni ratkaisu.
 Syy taitaa löytyäkkin noista getFullName tms. metodien kutsunnoista. Tykkäsin omasta simppelistä ja nopeasta ratkaisustani vaikka törmäyksiä tulikin aika paljon.
 
 
+
 hajautustaulujen kanssa, minkälaisilla täyttöasteilla (fill factor) kokeilit taulukkoa? Nopeutuiko tai hidastuiko käyttö erilaisilla täyttöasteilla?
 
 V: Kokeilin pienimpänä 0.5 loadfactoria ja korkeimpana 0.95. Load factor 0.8 jäi sitten käyttöön, kun sillä näytti tulevan hyvä tasapaino nopeuden kanssa ja se myös vähensi turhia taulukon kavatuksia ja törmäyksiä. esim. 0.95 loadfactorilla alkoi kestämään jo pidempää sen takia kun tuli niin paljon törmäyksiä. 
+
 
 
 kuinka paljon kasvatit hajautustaulun kokoa aina kerralla kun reallokointia tarvittiin? Nopeuttiko eri ratkaisut toimintaa ja/tai tuliko taulukosta tarpeettoman iso ja muistia tuhlaava (suurin osa siitä jäi tyhjäksi)?
@@ -92,13 +94,17 @@ kuinka paljon kasvatit hajautustaulun kokoa aina kerralla kun reallokointia tarv
 V: kasvatin taulukkoa aina 2x, jotta sille tulisi varmasti riittävästi tilaa ja jottei ohjelman tarvitsisi olla kokoaikaa kasvattaa taulukkoa. 2x vaikutti olevan hyvä ratkaisu, koska se oli nopea mutta lopussa se saattaa rohmuta vähän liikaa muistia, koska joskus taulukkoon jää tyhjää tilaa.
 
 
+
 kuinka syväksi puu muodostui eri hajautusfunktioilla, vai oliko niillä merkitystä? Kokeilitko erilaisia hajautusfunktioita?
 
 V: No esimerkiksi phonebooktestissä puun syvyys oli 40. Hajautusfunktion muuttaminen for looppiin hidasti koodia, vaikka pienensi puun syvyyttä. Päätin ottaa syvemmän mutta nopeamman puun.
 
+
+
 Millä tavoin hoidit törmäykset hajautustaulussa ja BST:ssä? Kokeilitko erilaisia vaihtoehtoja, ja miksi valitsit sen mikä jäi toteutukseen?
 
 V: BST:ssä hoidin törmäykset omalla LinkedListImplementatiolla, joka vaikutti toimivan erinomaisesti. Hajautustaulussa oli käytössä probing. En kokeillut muita vaihtoehtoja, koska nämä toimivat minulle riittävän hyvin.
+
 
 
 Tietorakenteiden toteutuksiesi pitää sisältää metodi getStatus(), joka tulostaa tietoa tietorakenteiden toiminnallisuudesta ja toteutuksesta. Mitä tässä tulostat ja miten mielestäsi palauttamasi toteutukset ovat parempia kuin muut kokeilusi, näiden tietojen perusteella mitä tulostat tuossa metodissa? Mitä voit sanoa näistä tulostetuista asioista suhteessa siihen mitä tässä olet analysoinut?
@@ -106,13 +112,17 @@ Tietorakenteiden toteutuksiesi pitää sisältää metodi getStatus(), joka tulo
 V: Molemmissa toteutuksissa tulostan testattavan materiaalin määrän "count", molemmissa tulostan myös kuinka paljon tilaa minun ohjelma varaa eli BSTssä tulostan puun maksimi syvyyden ja Hashtablessa tulostan kuinka suuri taulukkoni on ja kuinka suuri osa taulukosta on täytetty prosentteina. Näiden avulla saa hyvän kuvan, että onko toteutukseni järkevä, esim onko hajautustaulun lopullinen fill percentage joku tajuttoman alhainen. Silloin tiedän, että minun pitää uudelleen miettiä taulukon kasvattamistani.
 
 
+
+
 Minkä lajittelualgoritmin toteutit 05-invoices harjoituksessa, ja käytit tässä? Kokeilitko olisiko joku toinen lajittelualgoritmi tehokkaampi tämän aineiston kanssa? Olisiko heapsort ollut nopeampi kuin quicksort? Pitikö pinon tai kekomuistin kokoa kasvattaa jotta algoritmit ja tietorakenteet toimisivat?
 
 V: Quicksorttia. Quicksort on nopeampi, heapsortilla olisi tullut hitautta kun data määrät kasvaa eli isoimmissa testeissä se olisi ollut huomattavasti hitaampi. Edes quicksortilla, minun ei tarvinnut kasvattaa muistini määrää ohjelmalle. 
 
+
+
 Lopuksi, anna myös palautetta kurssista, kurssin tehtävistä ja kommentoi kurssin oppimistavoitteiden saavuttamista omalta kohdaltasi. Kerro myös mitä kurssilla voisi mielestäsi muuttaa jotta se olisi parempi.
 
-V: Olin positiivisesti yllättynyt kurssin rakenteeseen. Olen iloinen että pääsin oppimaan tira kurssilla kurssin aiheiden lisäksi myös perus juttuja kuten gitlabin käyttöä. En valitettavasti keksi mitään parannusehdotusta tällä hetkellä kurssille. 
+V: Olin positiivisesti yllättynyt kurssin rakenteeseen. Olen iloinen että pääsin oppimaan tira kurssilla kurssin aiheiden lisäksi myös perus juttuja kuten gitlabin käyttöä. Parannusehdotus: olisi kiva saada pisteistä hajua, eli miten mennyt tehtävät pisteiden osalta? 
 
 ## Valinnaiset tehtävät
 
