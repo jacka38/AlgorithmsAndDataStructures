@@ -63,6 +63,7 @@ V: Kokeilin eri primäärilukuja, erilaisia hajautusfunktioita. Ensimmäisenä k
 
 Suurimman eron löysin, kun kokeilin myös for looppia.
 Tällä hajautusfunktiolla, minun koodini oli tuplasti hitaampi kuin nykyiselläni.
+
     int result = 5381;
         for(char ch : this.getFullName().toCharArray()) {
             result = (result * 37 + Character.getNumericValue(ch));
@@ -70,6 +71,7 @@ Tällä hajautusfunktiolla, minun koodini oli tuplasti hitaampi kuin nykyisellä
     return result;
 
 Tässä nykyinen nopein löytämäni ratkaisu. 
+
     int result = 5381;
 
         result = (result << 5) + result + lastName.hashCode();
