@@ -74,7 +74,7 @@ V: kasvatin taulukkoa aina 2x, jotta sille tulisi varmasti riittävästi tilaa j
 
 kuinka syväksi puu muodostui eri hajautusfunktioilla, vai oliko niillä merkitystä? Kokeilitko erilaisia hajautusfunktioita?
 
-V: No esimerkiksi megapolis testissä puun syvyys oli 58, phonebooktestissä puun syvyys oli 40. En kokeillut muita hajautusfunktioita, koska tämä oli kelpo tulos.
+V: No esimerkiksi phonebooktestissä puun syvyys oli aluksi 40. Hajautusfunktion muutos, että se sisälti bit shiftauksen ja, että siellä oli mukana suurempi primääriluku tiputti sen 36.
 
 Millä tavoin hoidit törmäykset hajautustaulussa ja BST:ssä? Kokeilitko erilaisia vaihtoehtoja, ja miksi valitsit sen mikä jäi toteutukseen?
 
